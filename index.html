@@ -1,0 +1,215 @@
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.5/dist/popper.js"></script>
+
+
+    <script
+        src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+</head>
+<body>
+
+    <div id="repros"></div>
+
+    <script>
+$(document).ready(function () {
+    
+    console.log(qs('sha'))
+    if(qs('sha') == null)
+    {
+        
+        NavBase()
+    }else
+    {
+        Nav(qs('sha'))
+    }
+    
+});
+
+
+function NavBase()
+{
+    var api = "https://api.github.com/repos/Microshak/MicroNotes/git/refs/heads/master";
+    $.get(api, function (data) {
+        console.log(data)
+        var sha = data.object.sha
+        console.log(sha)
+        Nav(sha)
+    })
+}
+
+function Nav(sha)
+{
+    
+   // var sha = qs('sha') || "a350a86994417e39c4488be8514901f24757e2a5"
+    var path = qs('path') || ""
+
+    
+    
+    var api = "https://api.github.com/repos/Microshak/MicroNotes/git/trees/" + sha;
+    $.get(api, function (data) {
+        $.each(data.tree, function (idx, obj) {
+        
+            obj.base = 'https://microshak.github.io/MicroNotes/'
+            if(window.location.host.includes( 'localhost'))
+                 obj.base = 'http://'+window.location.host
+  
+                if(obj.type =="blob")
+                {
+                    var template = $('#file').html();
+                            if(obj.path.endsWith('md'))
+                            {
+                                obj.fpath =   path + "/" +obj.path.replace('.md','') 
+                                obj.pp = obj.path.replace('.md','')
+                    var html = Mustache.to_html(template, obj);
+                    $('#butt').append(html);
+
+                            }
+                            
+                }
+                else{
+                                var template = $('#folder').html();
+                                obj.spath =  path  + "/" + obj.path
+                                if(obj.spath.startsWith('/'))
+                                    obj.spath = obj.spath.substring(1,obj.spath.length + 2) 
+                                
+                                    console.log(path)
+
+                                    var html = Mustache.to_html(template, obj);
+
+                    $('#butt').append(html);
+
+                }
+
+        
+        
+        
+        
+        });
+    });
+
+
+}
+
+
+        function qs(key) {
+            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx control chars
+            var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        }
+
+
+</script>
+<style>
+.widecontainer
+{
+    width:90%;
+    margin: auto;
+}
+.cont
+{
+
+   
+    display: flex;
+    flex-direction: row;
+    /* flex-grow: 2; */
+    margin-top: 10px;
+    flex-flow: inherit;
+    /* flex: 6; */
+    padding-right: 20px;
+
+}
+
+</style>
+    <section class="after-loop">
+        <div class="widecontainer">
+            <div class="row" id="butt">
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <script id="folder" type="text/template">
+        <div class="cont">
+        <a class="btn btn-primary directory" href="./index.html?sha={{sha}}&path={{spath}}" role="button"><i class="fas fa-folder"></i>{{path}}</a>
+        </div>
+</script>
+
+
+    <script id="file" type="text/template">
+        <div class="cont">
+       
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{pp}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{pp}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{pp}}">
+              <a class="dropdown-item" href="{{base}}/Notes.html?path={{fpath}}">Slide</a>
+              <a class="dropdown-item" href="{{base}}/doc.html?path={{fpath}}">Sheet</a>
+              <a class="dropdown-item" href="https://github.com/Microshak/MicroNotes/blob/master/{{fpath}}.md">Source</a>
+            </div>
+          </div>
+
+
+
+        </div>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+
+
+
+</style>
+
+
+
+<a href="https://api.github.com/search/code?q=flask+in:file+language:md+repo:microshak/micronotes"></a>
+
+
+</body>
