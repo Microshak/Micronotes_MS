@@ -16,16 +16,16 @@
 ---
 # Copernicus 
 
-![full](https://microshak.github.io/MicroNotes/Images/Copernicus.webp)
+![full](https://microshak.github.io/MicroNotes_MS/Images/Copernicus.webp)
 
 ---
-![full](https://microshak.github.io/MicroNotes/Images/BigData/Apparent_retrograde_motion.gif)
+![full](https://microshak.github.io/MicroNotes_MS/Images/BigData/Apparent_retrograde_motion.gif)
 
 ---
 # History
 ### Originally data was stored on punch cards
 
-![full](https://microshak.github.io/MicroNotes/Images/PunchCard.jpg)
+![full](https://microshak.github.io/MicroNotes_MS/Images/PunchCard.jpg)
 
 ---
 
@@ -122,7 +122,7 @@ Joe 3   Child
 # Why Classify Data
 
 
-![full](https://microshak.github.io/MicroNotes/Images/BigData/WhyClassify.png)
+![full](https://microshak.github.io/MicroNotes_MS/Images/BigData/WhyClassify.png)
 ---
 
 
@@ -145,7 +145,7 @@ Joe 3   Child
 
 # What do we need to consider 
 ## 3 Vs
-![right](https://microshak.github.io/MicroNotes/Images/NetworkTopology-Ring.png)
+![right](https://microshak.github.io/MicroNotes_MS/Images/NetworkTopology-Ring.png)
 * Velocity (Hot Partitions)
 * Volume 
 * Variance
@@ -160,8 +160,8 @@ Joe 3   Child
 
 ---
 
-![right](https://microshak.github.io/MicroNotes/Images/Cap.png)
-![left](https://microshak.github.io/MicroNotes/Images/BigData/acidvsbase.jpg)
+![right](https://microshak.github.io/MicroNotes_MS/Images/Cap.png)
+![left](https://microshak.github.io/MicroNotes_MS/Images/BigData/acidvsbase.jpg)
 ---
 # BASE 
 
